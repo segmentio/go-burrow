@@ -47,6 +47,8 @@ type Lag struct {
 	Status     string      `json:"status"`
 	Complete   bool        `json:"complete"`
 	Partitions []Partition `json:"partitions"`
+	MaxLag     Partition   `json:"maxlag"`
+	TotalLag   int         `json:"totallag"`
 }
 
 // Partition represents a partition lag info.
@@ -58,10 +60,10 @@ type Partition struct {
 		Offset    int `json:"offset"`
 		Timestamp int `json:"timestamp"`
 		Lag       int `json:"lag"`
-	}
+	} `json:"start"`
 	End struct {
 		Offset    int `json:"offset"`
 		Timestamp int `json:"timestamp"`
 		Lag       int `json:"lag"`
-	}
+	} `json:"end"`
 }
