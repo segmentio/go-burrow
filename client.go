@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+
+	"github.com/pkg/errors"
 )
 
 // Client is a simple burrow client.
@@ -80,7 +82,7 @@ func (c *Client) get(path string, v interface{}) error {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		return err
+		return errors.Wrapf(err, "GET %s", url)
 	}
 
 	defer resp.Body.Close()
@@ -89,12 +91,17 @@ func (c *Client) get(path string, v interface{}) error {
 		var dec = json.NewDecoder(resp.Body)
 		var e *Error
 
-		if err := dec.Decode(&e); err == nil {
+		if err = dec.Decode(&e); err == nil {
 			return e
 		}
 
 		return fmt.Errorf("burrow: %s %s", url, resp.Status)
 	}
 
-	return json.NewDecoder(resp.Body).Decode(&v)
+	err = json.NewDecoder(resp.Body).Decode(&v)
+	if err != nil {
+		return errors.Wrapf(err, "GET %s", url)
+	}
+
+	return nil
 }
