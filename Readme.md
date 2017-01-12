@@ -1,187 +1,21 @@
+[![GoDoc](https://godoc.org/github.com/segmentio/go-burrow?status.svg)](http://godoc.org/github.com/segmentio/go-burrow) 
+
 # burrow
 --
     import "github.com/segmentio/go-burrow"
 
 Package burrow implements a simple burrow client.
 
-## Usage
+## License
 
-#### type Client
+Released under the MIT License
 
-```go
-type Client struct {
-}
-```
+(The MIT License)
 
-Client is a simple burrow client.
+Copyright (c) 2017 Segment friends@segment.com
 
-#### func  New
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-```go
-func New(endpoint string) (*Client, error)
-```
-New returns a new *Client with the given endpoint.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-#### func (*Client) Cluster
-
-```go
-func (c *Client) Cluster(name string) (cluster Cluster, err error)
-```
-Cluster returns cluster info by name.
-
-#### func (*Client) Clusters
-
-```go
-func (c *Client) Clusters() (clusters Clusters, err error)
-```
-Clusters returns a list of clusters.
-
-#### func (*Client) ConsumerLag
-
-```go
-func (c *Client) ConsumerLag(cluster, group string) (lag Lag, err error)
-```
-ConsumerLag returns consumer lag.
-
-#### func (*Client) ConsumerTopic
-
-```go
-func (c *Client) ConsumerTopic(cluster, group, topic string) (t Topic, err error)
-```
-ConsumerTopic returns consumer topic info.
-
-#### func (*Client) ConsumerTopics
-
-```go
-func (c *Client) ConsumerTopics(cluster, group string) (topics Topics, err error)
-```
-ConsumerTopics returns a list of topics for a `cluster` and `group`.
-
-#### func (*Client) Consumers
-
-```go
-func (c *Client) Consumers(name string) (consumers Consumers, err error)
-```
-Consumers returns a list of consumers for a cluster `name`.
-
-#### func (*Client) Topic
-
-```go
-func (c *Client) Topic(cluster, topic string) (t Topic, err error)
-```
-Topic returns info for a `topic` in `cluster`.
-
-#### func (*Client) Topics
-
-```go
-func (c *Client) Topics(cluster string) (topics Topics, err error)
-```
-Topics returns a list of topics for a `cluster`.
-
-#### type Cluster
-
-```go
-type Cluster struct {
-	Zookeepers    []string `json:"zookeepers"`
-	ZookeeperPort int      `json:"zookeeper_port"`
-	ZookeeperPath string   `json:"zookeeper_path"`
-	Brokers       []string `json:"brokers"`
-	BrokerPort    int      `json:"broker_port"`
-	OffsetsTopic  string   `json:"offsets_topic"`
-}
-```
-
-Cluster represents a cluster response.
-
-#### type Clusters
-
-```go
-type Clusters struct {
-	Names []string `json:"clusters"`
-}
-```
-
-Clusters represents a clusters response.
-
-#### type Consumers
-
-```go
-type Consumers struct {
-	Names []string `json:"consumers"`
-}
-```
-
-Consumers represents a list of consumers.
-
-#### type Error
-
-```go
-type Error struct {
-	Message string `json:"message"`
-}
-```
-
-Error reprsents a burrow api error.
-
-#### func (*Error) Error
-
-```go
-func (e *Error) Error() string
-```
-Error implements the error interface.
-
-#### type Lag
-
-```go
-type Lag struct {
-	Cluster    string      `json:"cluster"`
-	Group      string      `json:"group"`
-	Status     string      `json:"status"`
-	Complete   bool        `json:"complete"`
-	Partitions []Partition `json:"partitions"`
-}
-```
-
-Lag represents a lag.
-
-#### type Partition
-
-```go
-type Partition struct {
-	Topic     string `json:"topic"`
-	Partition int    `json:"partition"`
-	Status    string `json:"status"`
-	Start     struct {
-		Offset    int `json:"offset"`
-		Timestamp int `json:"timestamp"`
-		Lag       int `json:"lag"`
-	}
-	End struct {
-		Offset    int `json:"offset"`
-		Timestamp int `json:"timestamp"`
-		Lag       int `json:"lag"`
-	}
-}
-```
-
-Partition represents a partition lag info.
-
-#### type Topic
-
-```go
-type Topic struct {
-	Offsets []int `json:"offsets"`
-}
-```
-
-Topic represents a topic.
-
-#### type Topics
-
-```go
-type Topics struct {
-	Names []string `json:"topics"`
-}
-```
-
-Topics represents a list of topics.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
