@@ -59,8 +59,16 @@ func (c *Client) ConsumerTopic(cluster, group, topic string) (t Topic, err error
 
 // ConsumerLag returns consumer lag.
 func (c *Client) ConsumerLag(cluster, group string) (lag Lag, err error) {
-	err = c.get("/kafka/"+cluster+"/consumer/"+group+"/lag", &lag)
-	return
+	res := struct {
+		Lag Lag `json:"status"`
+	}{}
+
+	err = c.get("/kafka/"+cluster+"/consumer/"+group+"/lag", &res)
+	if err != nil {
+		return
+	}
+
+	return res.Lag, nil
 }
 
 // Topics returns a list of topics for a `cluster`.
