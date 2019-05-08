@@ -95,6 +95,10 @@ func (c *Client) get(path string, v interface{}) error {
 
 	defer resp.Body.Close()
 
+	if resp.StatusCode == 404 {
+		return ErrGroupNotFound
+	}
+
 	if resp.StatusCode >= 400 {
 		var dec = json.NewDecoder(resp.Body)
 		var e *Error
