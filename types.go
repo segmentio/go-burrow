@@ -70,4 +70,6 @@ type Partition struct {
 		Timestamp int `json:"timestamp"`
 		Lag       int `json:"lag"`
 	} `json:"end"`
+	CurrentLag int     `json:"current_lag"`
+	Complete   float64 `json:"complete"`
 }
