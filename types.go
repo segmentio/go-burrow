@@ -1,5 +1,9 @@
 package burrow
 
+import "github.com/segmentio/errors-go"
+
+var ErrGroupNotFound = errors.New("group not found")
+
 // Error reprsents a burrow api error.
 type Error struct {
 	Message string `json:"message"`
@@ -45,7 +49,7 @@ type Lag struct {
 	Cluster    string      `json:"cluster"`
 	Group      string      `json:"group"`
 	Status     string      `json:"status"`
-	Complete   bool        `json:"complete"`
+	Complete   float64     `json:"complete"`
 	Partitions []Partition `json:"partitions"`
 	MaxLag     Partition   `json:"maxlag"`
 	TotalLag   int         `json:"totallag"`
@@ -66,4 +70,6 @@ type Partition struct {
 		Timestamp int `json:"timestamp"`
 		Lag       int `json:"lag"`
 	} `json:"end"`
+	CurrentLag int     `json:"current_lag"`
+	Complete   float64 `json:"complete"`
 }

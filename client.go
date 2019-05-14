@@ -23,7 +23,7 @@ func New(endpoint string) (*Client, error) {
 	}
 
 	return &Client{
-		url: fmt.Sprintf("%s://%s/v2", u.Scheme, u.Host),
+		url: fmt.Sprintf("%s://%s/v3", u.Scheme, u.Host),
 	}, nil
 }
 
@@ -94,6 +94,10 @@ func (c *Client) get(path string, v interface{}) error {
 	}
 
 	defer resp.Body.Close()
+
+	if resp.StatusCode == 404 {
+		return ErrGroupNotFound
+	}
 
 	if resp.StatusCode >= 400 {
 		var dec = json.NewDecoder(resp.Body)

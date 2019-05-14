@@ -1,0 +1,4 @@
+github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
+github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/segmentio/errors-go v1.0.0 h1:B4mbo4hP3+XffV1GhwyAcHlvWoZtYdTyc3BOVPxspTQ=
+github.com/segmentio/errors-go v1.0.0/go.mod h1:RDVEREUrpa4/jM8rt5KsQpu+JoXPi6i07vG7m4tX0MY=
