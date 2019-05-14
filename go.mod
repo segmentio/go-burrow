@@ -1,4 +1,4 @@
-module github.com/segmentio/go-burrow
+module github.com/segmentio/go-burrow/v3
 
 go 1.12
 
